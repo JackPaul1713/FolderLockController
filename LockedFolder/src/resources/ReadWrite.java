@@ -19,7 +19,7 @@ public class ReadWrite
 	public static void write(String fileName, String line) throws IOException
 	{
 		Writer fw = new FileWriter(fileName);
-		fw.write("line");
+		fw.write(line);
 		fw.close();
 	}
 }

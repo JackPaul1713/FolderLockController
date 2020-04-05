@@ -10,6 +10,10 @@ import java.io.IOException;
 
 public class LockUnlockCommand
 {
+	static String progLoc = "C:\\Program Files\\FolderLock\\";
+	static String fileLoc = "Files\\";
+	static String resLoc = "Resouces\\";
+	
 	static String key;
 	static String path;
 	static String enPath;
@@ -17,43 +21,39 @@ public class LockUnlockCommand
 	public static void lockUnlock(String name, String password, String action) throws IOException
 	{
 		//settup
-		key = ReadWrite.read(name + "Key");
-		path = ReadWrite.read(name + "Path");
-		enPath = ReadWrite.read(name + "EnPath");
+		key = ReadWrite.read("Key");
+		path = ReadWrite.read("Path");
+		enPath = ReadWrite.read("EnPath");
+		ReadWrite.write(progLoc + fileLoc + "\\loc\\CurrentLocation", progLoc + resLoc + name);
 		//lockOrUnlock
-		if(action == "-l")
+		if(action.equals("/l"))
 		{
 			lock(name, password);
 		}
-		else if(action == "-u")
+		else if(action.equals("/u"))
 		{
 			unlock(name, password);
 		}
-		else
-		{
-			System.out.println("Invalid /action\nTry /?");
-		}
 	}
 	
-	public static void lock(String name, String pw) throws IOException
+	private static void lock(String name, String pw) throws IOException
 	{
 		//decrypt
 		key = EncryptDecrypt.decryptKey(key, pw);
 		path = EncryptDecrypt.decrypt(enPath, key);
 		//lock
-		ReadWrite.write(name + "Path", path);
-		//Run.run(dir + "\\FolderLock\\Files\\cmd\\Lock.bat");
+		ReadWrite.write(progLoc + resLoc + name + "\\" + "Path", path);
 		Run.run("cmd /c start \"\" Lock.bat");
-		ReadWrite.write(name + "Path", "");
+		ReadWrite.write(progLoc + resLoc + name + "\\" + "Path", "");
 	}
-	public static void unlock(String name, String pw) throws IOException
+	private static void unlock(String name, String pw) throws IOException
 	{
 		//decrypt
 		key = EncryptDecrypt.decryptKey(key, pw);
 		path = EncryptDecrypt.decrypt(enPath, key);
 		//unlock
-		ReadWrite.write(name + "Path", path);
+		ReadWrite.write(progLoc + resLoc + name + "\\" + "Path", path);
 		Run.run("cmd /c start \"\" Unlock.bat");
-		ReadWrite.write(name + "Path", "");
+		ReadWrite.write(progLoc + resLoc + name + "\\" + "Path", "");
 	}
 }
