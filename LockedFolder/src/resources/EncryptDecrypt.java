@@ -1,8 +1,8 @@
-package lockUnlock;
+package resources;
 
 import java.math.BigInteger;
 
-public class EncryptAndDecrypt
+public class EncryptDecrypt
 {
 	static final int[] NUMBKEYS = 
 			{
@@ -21,7 +21,8 @@ public class EncryptAndDecrypt
 				61, 62, 63, 64, 65, 
 				66, 67, 68, 69, 70, 
 				71, 72, 73, 74, 75, 
-				76 
+				76, 77, 78, 79, 80,
+				81
 			};
 	static final String[] SYMBKEYS = 
 			{

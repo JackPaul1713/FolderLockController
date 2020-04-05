@@ -1,4 +1,4 @@
-package lockUnlock;
+package resources;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.Writer;
 import java.io.IOException;
 
-public class ReadAndWrite
+public class ReadWrite
 {
 	public static String read(String fileName) throws IOException
 	{
